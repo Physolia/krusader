@@ -21,6 +21,8 @@
 
 #include "krdebuglogger.h"
 
+#include <QStringBuilder>
+
 KrDebugLogger krDebugLogger;
 
 KrDebugLogger::KrDebugLogger()
@@ -56,10 +58,10 @@ void KrDebugLogger::increaseIndentation()
 // ---------------------------------------------------------------------------------------
 
 KrDebugFnLogger::KrDebugFnLogger(const QString &argFunction, int line, KrDebugLogger &argKrDebugLogger) :
-    function(argFunction), krDebugLogger(argKrDebugLogger)
+    functionName(argFunction), krDebugLogger(argKrDebugLogger)
 {
     // Shows that a function has been started
-    qDebug().nospace().noquote() << krDebugLogger.indentationEtc(function, line, "┏");
+    qDebug().nospace().noquote() << krDebugLogger.indentationEtc(functionName, line, "┏");
 
     krDebugLogger.increaseIndentation();
 }
@@ -68,6 +70,5 @@ KrDebugFnLogger::~KrDebugFnLogger()
 {
     krDebugLogger.decreaseIndentation();
     // Shows that a function is going to finish
-    qDebug().nospace().noquote() << krDebugLogger.indentationEtc(function, 0, "┗");
+    qDebug().nospace().noquote() << krDebugLogger.indentationEtc(functionName, 0, "┗");
 }
-

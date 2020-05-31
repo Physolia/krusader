@@ -26,8 +26,6 @@
 #include <QDebug>
 #include <QDir>
 #include <QFile>
-#include <QStringBuilder>
-#include <QTextStream>
 
 #include <unistd.h>
 
@@ -67,12 +65,12 @@ class KrDebugFnLogger
 public:
     //! This constructor is used inside the KRFUNC macro. For more details: the description of the KRFUNC macro can be seen
     explicit KrDebugFnLogger(const QString &argFunction, int line, KrDebugLogger &argKrDebugLogger);
-    //! This desstructor is used inside the KRFUNC macro. For more details: the description of the KRFUNC macro can be seen
+    //! This destructor is used inside the KRFUNC macro. For more details: the description of the KRFUNC macro can be seen
     ~KrDebugFnLogger();
 
 private:
     //! The name of a function which is going to be written about
-    QString function;
+    QString functionName;
     //! The KrDebugLogger that manages aspects that are common to KrDebugFnLogger objects
     KrDebugLogger &krDebugLogger;
 };
@@ -90,4 +88,3 @@ extern KrDebugLogger krDebugLogger;
     qDebug().nospace().noquote() << krDebugLogger.indentationEtc(__FUNCTION__, __LINE__) << ": " << X;
 
 #endif // KRDEBUGLOGGER_H
-
