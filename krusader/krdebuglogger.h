@@ -65,7 +65,7 @@ class KrDebugFnLogger
 public:
     //! This constructor is used inside the KRFUNC macro. For more details: the description of the KRFUNC macro can be seen
     explicit KrDebugFnLogger(const QString &argFunction, int line, KrDebugLogger &argKrDebugLogger);
-    //! This destructor is used inside the KRFUNC macro. For more details: the description of the KRFUNC macro can be seen
+    //! For more details: the description of the KRFUNC macro can be seen
     ~KrDebugFnLogger();
 
 private:
@@ -81,6 +81,13 @@ private:
 extern KrDebugLogger krDebugLogger;
 
 //! Writes a function name, etc. when entering the function and automatically before exiting from it
+/*!
+    Inside a function this macro is aimed to be used only once, in its first line.
+    Each time that the code of this macro is executed: an object is created in the stack, its
+    constructor shows information (useful to know e.g. that the function has started), and it's
+    caused that when the object is destroyed (because the function is finished) the destructor shows
+    other information (useful to know e.g. that the function has finished)
+*/
 #define KRFUNC \
     KrDebugFnLogger functionLogger(__FUNCTION__, __LINE__, krDebugLogger);
 
